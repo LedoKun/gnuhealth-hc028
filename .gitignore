@@ -1,0 +1,6 @@
+data/attach
+data/db
+data/log
+data/config/*.conf
+
+.vscode

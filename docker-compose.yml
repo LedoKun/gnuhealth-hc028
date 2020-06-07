@@ -1,0 +1,35 @@
+version: '2.1'
+services:
+  db:
+    image: postgres:11-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: gnuhealth
+      POSTGRES_PASSWORD: gnuhealth
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gnuhealth"]
+      interval: 60s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+
+  gnuhealth:
+    build:
+      context: ./gnuhealth
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -O /dev/null http://localhost:8080 || exit 1"]
+      interval: 60s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - ./data/attach:/server/attach
+      - ./data/log:/server/gnuhealth/log
+      - ./data/config:/server/gnuhealth/tryton/server/config
