@@ -1,6 +1,6 @@
 server {
-    listen 80; # ipv4
-    listen [::]:80; # ipv6
+    listen 8080; # ipv4
+    listen [::]:8080; # ipv6
     server_name gnuhealth; # host
 
     location / {
