@@ -2,5 +2,6 @@ data/attach
 data/db
 data/log
 data/config/*.conf
+data/config/*.ini
 
 .vscode

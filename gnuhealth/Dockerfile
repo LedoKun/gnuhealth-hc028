@@ -21,9 +21,13 @@ WORKDIR /server
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -yq \
+        build-essential \
         ca-certificates \
         curl \
         git \
+        gnupg \
+        libpcre3 \
+        libpcre3-dev \
         lsb-release \
         patch \
         python3 \
@@ -31,18 +35,17 @@ RUN apt-get update \
         python3-pip \
         python3-setuptools \
         python3-wheel \
+        sudo \
         vim \
         wget \
-        build-essential \
-        sudo \
-        gnupg \
     && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && apt-get update \
     && apt-get install --no-install-recommends -yq \
         nodejs \
     && npm install -g grunt-cli \
-    && useradd -d /server gnuhealth \
-    && chown -R gnuhealth /server
+    && useradd -d /server -s /bin/bash gnuhealth \
+    && chown -R gnuhealth /server \
+    && python3 -m pip install uwsgi -I --no-cache-dir
 
 # install GNU Health
 USER gnuhealth
@@ -66,12 +69,12 @@ USER root
 
 RUN apt-get clean autoclean \
     && apt-get autoremove --yes \
+        build-essential \
         ca-certificates \
         curl \
         git \
-        patch \
-        build-essential \
         gnupg \
+        patch \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /server/gnuhealth-${GNUHEALTH_VERSION}*
 

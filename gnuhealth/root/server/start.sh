@@ -40,5 +40,8 @@ bailout()
 
 source $HOME/.gnuhealthrc
 message "INFO" "Starting GNU Health Server version ${GNUHEALTH_VERSION} ..."
-cd ${GNUHEALTH_DIR}/tryton/server/${TRYTOND}/bin
-python3 ./trytond --logconf "${GNUHEALTH_DIR}"/tryton/server/config/gnuhealth_log.conf $@ || bailout
+
+#cd ${GNUHEALTH_DIR}/tryton/server/${TRYTOND}/bin
+#python3 ./trytond --logconf "${GNUHEALTH_DIR}"/tryton/server/config/gnuhealth_log.conf $@ || bailout
+
+uwsgi --ini "${GNUHEALTH_DIR}"/tryton/server/config/uwsgi.ini --thunder-lock
