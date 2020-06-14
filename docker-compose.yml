@@ -31,7 +31,7 @@ services:
       retries: 10
     volumes:
       - ./data/attach:/server/attach
-      - ./data/log:/server/gnuhealth/log
+      - ./data/logs:/server/gnuhealth/logs
       - ./data/config/gnuhealth:/server/gnuhealth/tryton/server/config
 
   nginx:
