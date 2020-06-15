@@ -27,10 +27,10 @@ services:
 
   nginx:
     restart: unless-stopped
-    image: nginx:1
+    image: nginx:1-alpine
     ports:
       - 8000:8000
-    restart: always
+    restart: unless-stopped
     depends_on:
       - gnuhealth
       - db
