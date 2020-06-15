@@ -1,8 +1,5 @@
-data/attach
-data/db
-data/logs
-data/config/gnuhealth/*.conf
-data/config/nginx/*.conf
-data/config/gnuhealth/*.ini
+data
+config/*.conf
+config/*.ini
 
 .vscode
