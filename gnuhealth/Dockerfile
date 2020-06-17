@@ -102,7 +102,10 @@ RUN apt-get update \
             libssl-dev \
             python3-dev
 
-ADD ./uwsgi.conf /etc/uwsgi.conf
+COPY ./root/etc /etc/
+
+ENV TRYTOND_CONFIG="/etc/trytond.conf"
+ENV TRYTOND_LOGGING_CONFIG="/etc/gnuhealth_log.conf"
 
 VOLUME ["/var/lib/trytond/db"]
 
