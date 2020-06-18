@@ -16,16 +16,37 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
-      DB_USER: gnuhealth
-      DB_PASSWORD: gnuhealth
-      DB_HOSTNAME: db
-      DB_PORT: 5432
       TRYTOND_DATABASE_NAMES: gnuhealth
       PYTHONOPTIMIZE: 1
+      CONTAINER_ROLE: server
     depends_on:
       - db
     volumes:
       - ./data/attach:/var/lib/trytond/db
+
+  # gnuhealth-worker:
+  #   build:
+  #     context: ./gnuhealth
+  #     dockerfile: Dockerfile
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_DB_NAME: gnuhealth
+  #     CONTAINER_ROLE: worker
+  #   depends_on:
+  #     - db
+  #     - gnuhealth
+
+  # gnuhealth-cron:
+  #   build:
+  #     context: ./gnuhealth
+  #     dockerfile: Dockerfile
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_DB_NAME: gnuhealth
+  #     CONTAINER_ROLE: cron
+  #   depends_on:
+  #     - db
+  #     - gnuhealth
 
   nginx:
     restart: unless-stopped
