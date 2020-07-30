@@ -1,5 +1,2 @@
 data
-config/*.conf
-config/*.ini
-
 .vscode

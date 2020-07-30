@@ -3,7 +3,7 @@ version: '2.1'
 services:
   db:
     image: postgres:11-alpine
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_USER: gnuhealth
       POSTGRES_PASSWORD: gnuhealth
@@ -14,25 +14,18 @@ services:
     build:
       context: ./gnuhealth
       dockerfile: Dockerfile
-    restart: unless-stopped
-    environment:
-      DB_USER: gnuhealth
-      DB_PASSWORD: gnuhealth
-      DB_HOSTNAME: db
-      DB_PORT: 5432
-      TRYTOND_DATABASE_NAMES: gnuhealth
-      PYTHONOPTIMIZE: 1
+    restart: always
     depends_on:
       - db
     volumes:
-      - ./data/attach:/var/lib/trytond/db
+      - ./data/attach:/var/lib/tryton
+      - ./data/log:/var/log/tryton
 
   nginx:
-    restart: unless-stopped
     image: nginx:1-alpine
     ports:
       - 8000:8000
-    restart: unless-stopped
+    restart: always
     depends_on:
       - gnuhealth
       - db
