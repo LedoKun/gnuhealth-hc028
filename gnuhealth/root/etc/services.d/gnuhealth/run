@@ -1,0 +1,11 @@
+#!/bin/bash
+
+export TRYTOND=`ls -1d /gnuhealth/gnuhealth/tryton/server/trytond-* | egrep -o "trytond-[0-9\.]+.[0-9\.]+.[0-9\.]+" | sort -V | tail -1`
+cd /gnuhealth/gnuhealth/tryton/server/${TRYTOND}/bin
+
+exec    /bin/s6-setuidgid gnuhealth \
+        /usr/bin/python3 ./trytond \
+        --config /gnuhealth/gnuhealth/tryton/server/config/trytond.conf \
+        --logconf=/gnuhealth/gnuhealth/tryton/server/config/trytond_log.conf \
+        --pidfile=/tmp/trytond.pid \
+        -d gnuhealth
