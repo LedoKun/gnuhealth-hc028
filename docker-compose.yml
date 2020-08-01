@@ -18,8 +18,8 @@ services:
     depends_on:
       - db
     volumes:
-      - ./data/attach:/var/lib/tryton
-      - ./data/log:/var/log/tryton
+      - ./data/attach:/gnuhealth/attach
+      - ./data/log:/gnuhealth/log
 
   nginx:
     image: nginx:1-alpine
