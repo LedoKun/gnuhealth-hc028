@@ -11,10 +11,12 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Prepare system
 USER root
 
-RUN apt-get update \
+RUN mkdir -p /usr/share/man/man1 \
+    && apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
         curl \
+        default-jre-headless \
         patch \
         python3-pip \
         python3-setuptools \
@@ -22,6 +24,7 @@ RUN apt-get update \
         unoconv \
         # uwsgi-plugin-python3 \
         libreoffice-common \
+        libreoffice-java-common \
         vim \
         wget \
     && curl -sL https://deb.nodesource.com/setup_12.x | /bin/bash - \

@@ -6,6 +6,6 @@ cd /gnuhealth/gnuhealth/tryton/server/${TRYTOND}/bin
 exec    /bin/s6-setuidgid gnuhealth \
         /usr/bin/python3 ./trytond-cron \
         --config /gnuhealth/gnuhealth/tryton/server/config/trytond.conf \
-        --logconf=/gnuhealth/gnuhealth/tryton/server/config/trytond_log.conf \
-        --pidfile=/tmp/trytond-cron.pid \
-        -d gnuhealth
+        --logconf /gnuhealth/gnuhealth/tryton/server/config/trytond_log.conf \
+        --pidfile /tmp/trytond-cron.pid \
+        --database gnuhealth
