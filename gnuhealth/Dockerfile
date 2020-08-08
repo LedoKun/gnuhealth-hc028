@@ -40,7 +40,7 @@ RUN mkdir -p /usr/share/man/man1 \
 USER gnuhealth
 
 RUN export PATH="${PATH}:/gnuhealth/.local/bin" \
-    && python3 -m pip install python-magic \
+    && python3 -m pip --no-cache-dir install python-magic \
     && cd /gnuhealth \
     && wget ${GNUHEALTH_URL} \
     && tar -xvf gnuhealth-${GNUHEALTH_VERSION}.tar.gz \
