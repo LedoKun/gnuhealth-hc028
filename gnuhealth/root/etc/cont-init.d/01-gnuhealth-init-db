@@ -1,10 +1,10 @@
 #!/bin/bash
 
 set -e
-set -x
 
-export INIT_FILE=/gnuhealth/log/init_db.log
+export INIT_FILE=/gnuhealth/log/INIT-DO-NOT-DELETE
 
 if [ ! -f "$INIT_FILE" ]; then
-    su - gnuhealth -c "/bin/bash /gnuhealth/init_db.sh" >${INIT_FILE}
+    touch ${INIT_FILE}
+    su - gnuhealth -c "/bin/bash /gnuhealth/init_db.sh" | tee -a "${INIT_FILE}"
 fi

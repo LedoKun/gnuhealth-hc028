@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e
-set -x
 
 export TEMP_PASSWORD=$(sed "s/[^a-zA-Z0-9]//g" <<<$(cat /dev/urandom | tr -dc 'a-zA-Z0-9!@#$%*()-+' | fold -w 32 | head -n 1))
 export TRYTOND=$(ls -1d /gnuhealth/gnuhealth/tryton/server/trytond-* | egrep -o "trytond-[0-9\.]+.[0-9\.]+.[0-9\.]+" | sort -V | tail -1)
@@ -25,6 +24,25 @@ echo "Enable GNUHealth modules..."
     --config /gnuhealth/gnuhealth/tryton/server/config/trytond.conf \
     --logconf /gnuhealth/gnuhealth/tryton/server/config/trytond_log.conf \
     --database gnuhealth \
+    -u health \
+    -u health_calendar \
+    -u health_contact_tracing \
+    -u health_crypto \
+    -u health_crypto_lab \
+    -u health_lab \
+    -u health_disability \
+    -u health_history \
+    -u health_icd10 \
+    -u health_imaging \
+    -u health_lab \
+    -u health_lifestyle \
+    -u health_ophthalmology \
+    -u health_pediatrics \
+    -u health_pediatrics_growth_charts_who \
+    -u health_pediatrics_growth_charts \
+    -u health_qrcodes \
+    -u health_reporting \
+    -u health_who_essential_medicines \
     -u health_profile \
     --activate-dependencies
 
