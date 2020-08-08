@@ -2,9 +2,12 @@
 
 set -e
 
-export INIT_FILE=/gnuhealth/log/INIT-DO-NOT-DELETE
+export INIT_FILE=/gnuhealth/log/.db_init_do_not_delete
+export INIT_LOG=/gnuhealth/log/db_init.log
 
 if [ ! -f "$INIT_FILE" ]; then
+    touch ${INIT_LOG}
+    su - gnuhealth -c "/bin/bash /gnuhealth/init_db.sh" | tee -a "${INIT_LOG}"
+
     touch ${INIT_FILE}
-    su - gnuhealth -c "/bin/bash /gnuhealth/init_db.sh" | tee -a "${INIT_FILE}"
 fi
