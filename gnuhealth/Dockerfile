@@ -1,12 +1,13 @@
-FROM debian:10.1-slim
+FROM debian:10-slim
 
 LABEL MAINTAINER=luengwattanapong.rom@gmail.com
 
 ENV GNUHEALTH_VERSION=3.6.4
-ARG GNUHEALTH_INSTALLER_VERSION=latest
+ARG GNUHEALTH_INSTALLER_VERSION=3.6.3
 ARG GNUHEALTH_URL="https://ftp.gnu.org/gnu/health/gnuhealth-${GNUHEALTH_VERSION}.tar.gz"
 ARG GNUHEALTH_INSTALLER_URL="https://ftp.gnu.org/gnu/health/gnuhealth-setup-${GNUHEALTH_INSTALLER_VERSION}.tar.gz"
 ARG DEBIAN_FRONTEND=noninteractive
+ARG S6_OVERLAY_VERSION=v2.0.0.1
 
 # Prepare system
 USER root
@@ -17,17 +18,17 @@ RUN mkdir -p /usr/share/man/man1 \
         ca-certificates \
         curl \
         default-jre-headless \
+        libmagic1 \
+        libreoffice-common \
+        libreoffice-java-common \
         patch \
         python3-pip \
         python3-setuptools \
         python3-wheel \
         unoconv \
         # uwsgi-plugin-python3 \
-        libreoffice-common \
-        libreoffice-java-common \
         vim \
         wget \
-        libmagic1 \
     && curl -sL https://deb.nodesource.com/setup_12.x | /bin/bash - \
     && apt-get install -y --no-install-recommends \
         git \
@@ -59,7 +60,7 @@ RUN export PATH="${PATH}:/gnuhealth/.local/bin" \
 # install s6-overlay
 USER root
 
-ADD https://github.com/just-containers/s6-overlay/releases/download/v2.0.0.1/s6-overlay-amd64.tar.gz /tmp/
+ADD "https://github.com/just-containers/s6-overlay/releases/download/${S6_OVERLAY_VERSION}/s6-overlay-amd64.tar.gz" /tmp/
 RUN tar zxf /tmp/s6-overlay-amd64.tar.gz -C /
 
 # Cleanup

@@ -29,21 +29,21 @@ echo "Enable GNUHealth modules..."
     -u health_contact_tracing \
     -u health_crypto \
     -u health_crypto_lab \
-    -u health_lab \
     -u health_disability \
     -u health_history \
     -u health_icd10 \
     -u health_imaging \
     -u health_lab \
+    -u health_lab \
     -u health_lifestyle \
     -u health_ophthalmology \
     -u health_pediatrics \
-    -u health_pediatrics_growth_charts_who \
     -u health_pediatrics_growth_charts \
+    -u health_pediatrics_growth_charts_who \
+    -u health_profile \
     -u health_qrcodes \
     -u health_reporting \
     -u health_who_essential_medicines \
-    -u health_profile \
     --activate-dependencies
 
 echo "Done..."
