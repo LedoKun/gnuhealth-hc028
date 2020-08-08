@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+set -x
+
+export INIT_FILE=/gnuhealth/log/init_db.log
+
+if [ ! -f "$INIT_FILE" ]; then
+    su - gnuhealth -c "/bin/bash /gnuhealth/init_db.sh" >${INIT_FILE}
+fi

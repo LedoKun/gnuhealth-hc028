@@ -27,6 +27,7 @@ RUN mkdir -p /usr/share/man/man1 \
         libreoffice-java-common \
         vim \
         wget \
+        libmagic1 \
     && curl -sL https://deb.nodesource.com/setup_12.x | /bin/bash - \
     && apt-get install -y --no-install-recommends \
         git \
@@ -38,9 +39,9 @@ RUN mkdir -p /usr/share/man/man1 \
 # Install GNUHealth
 USER gnuhealth
 
-ARG PATH="${PATH}:/gnuhealth/.local/bin"
-
-RUN cd /gnuhealth \
+RUN export PATH="${PATH}:/gnuhealth/.local/bin" \
+    && python3 -m pip install python-magic \
+    && cd /gnuhealth \
     && wget ${GNUHEALTH_URL} \
     && tar -xvf gnuhealth-${GNUHEALTH_VERSION}.tar.gz \
     && cd gnuhealth-${GNUHEALTH_VERSION} \
